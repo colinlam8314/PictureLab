@@ -112,13 +112,24 @@ public class IntArrayWorker
 }
   public int getLargest()
   {
-      int max = 0;
+      int max = matrix[0][0];
       for (int[] row:matrix){
           for (int column:row){
               if (column>max)
-                  column = max;
+                  max = column;
                 }
 }
 return max;
 }
+   public int getColTotal(int c)
+   {
+       int i=0;
+       int sum = 0;
+       for (int[] a:matrix)
+       {
+           sum+= matrix[i][c];
+           i++;
+        }
+        return sum;
+    }
 }
