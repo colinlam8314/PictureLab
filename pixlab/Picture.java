@@ -96,8 +96,89 @@ public class Picture extends SimplePicture
         pixelObj.setBlue(0);
       }
     }
-  }
+  }//END zeroBlue()
   
+  public void zeroRed()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      for (Pixel[] rows : pixels)
+      {
+          for (Pixel p : rows)
+          {
+              int red = p.getRed();
+              p.setRed(red-red);
+          }
+      }
+  }//END zeroRed()
+  
+  public void zeroGreen()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      for (Pixel[] rows : pixels)
+      {
+          for (Pixel p : rows)
+          {
+              int green = p.getGreen();
+              p.setGreen(green-green);
+          }
+      }
+  }//END zeroGreen()
+  public void keepOnlyBlue()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      zeroRed();
+      zeroGreen();
+  }//END keepOnlyBlue()
+  public void negate()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      for (Pixel[] rows : pixels)
+      {
+          for (Pixel p: rows)
+          {
+              int red = p.getRed();
+              int green = p.getGreen();
+              int blue = p.getBlue();
+              p.setRed(255-red);
+              p.setGreen(255-green);
+              p.setBlue(255-blue);
+          }
+      }
+  }
+  public void grayscale()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      for (Pixel[] rows : pixels)
+      {
+          for (Pixel p: rows)
+          {
+              int red = p.getRed();
+              int green = p.getGreen();
+              int blue = p.getBlue();
+              int avg = (red + green + blue)/3;
+              p.setRed(avg);
+              p.setGreen(avg);
+              p.setBlue(avg);
+          }
+      }
+  }
+  public void fixUnderwater()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      for (int i=0;i<113;i++)
+      {
+          for (int j=113;j<178;j++)
+          {
+              Pixel p = pixels[i][j];
+              int red = p.getRed();
+              int blue = p.getBlue();
+              if ((red<20)||(blue>160))
+              {
+                  keepOnlyBlue();
+            }
+        }
+  }
+}
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
