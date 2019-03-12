@@ -219,16 +219,57 @@ public class Picture extends SimplePicture
       Pixel[][] pixels = this.getPixels2D();
       Pixel topPixel = null;
       Pixel botPixel = null;
-      int height = pixels[0].length;
+      int height = pixels.length;
       for (int col = 0; col<pixels[0].length;col++)
       {
           for (int row = 0; row<height/2; row++)
           {
               topPixel = pixels[row][col];
-              botPixel = pixels[height][col];
+              botPixel = pixels[height-1-row][col];
               botPixel.setColor(topPixel.getColor());
             }
         }
+  }
+  public void mirrorHorizontalBotToTop()
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      Pixel topPixel = null;
+      Pixel botPixel = null;
+      int height = pixels.length;
+      for (int col = 0; col<pixels[0].length;col++)
+      {
+          for (int row = 0; row<height/2; row++)
+          {
+              topPixel = pixels[height-1-row][col];
+              botPixel = pixels[row][col];
+              botPixel.setColor(topPixel.getColor());
+            }
+        }
+  }
+  public void mirrorDiagonal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int width = pixels[0].length;
+    int height = pixels.length;
+    if (width<height)
+    {
+        height = width;
+    }
+    else
+    {
+        width = height;
+    }
+    for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < width; col++)
+      {
+        leftPixel = pixels[col][row];
+        rightPixel = pixels[row][col];
+        rightPixel.setColor(leftPixel.getColor());
+      }
+    } 
   }
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
@@ -250,10 +291,11 @@ public class Picture extends SimplePicture
         rightPixel = pixels[row]                       
                          [mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
+        count++; 
       }
     }
+
   }
-  
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
