@@ -88,7 +88,12 @@ public class PictureTester
     swan.edgeDetection(10);
     swan.explore();
   }
-  
+  public static void testEdgeDetection2()
+  {
+      Picture swan = new Picture("swan.jpg");
+      swan.edgeDetection2(10);
+      swan.explore();
+    }
   /*
    * Colin Lam's changes
    */
@@ -116,6 +121,14 @@ public class PictureTester
       water.fixUnderwater();
       water.explore();
     }
+  public static void testCopy()
+  {
+      Picture ocean = new Picture("beach.jpg");
+      Picture seagull = new Picture("seagull.jpg");
+      ocean.copy(seagull,233,450,233,229,317,352);
+      ocean.copy(seagull,233,50,233,229,323,350);
+      ocean.explore();
+  }
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
@@ -140,9 +153,9 @@ public class PictureTester
     testMirrorGull();
     testMirrorDiagonal();
     //testCollage();
-    //testCopy();
-    //testEdgeDetection();
-    //testEdgeDetection2();
+    testCopy();
+    testEdgeDetection();
+    testEdgeDetection2();
     //testChromakey();
     //testEncodeAndDecode();
     //testGetCountRedOverValue(250);
